@@ -1,0 +1,24 @@
+Bookshelf checks — expected results, not recorded runtime results
+
+1. Restore packages and Build Solution (Ctrl+Shift+B). Expect no errors.
+2. Package Manager Console: Update-Database. Expect InitialCreate and AddRating to apply.
+3. SQL Server Object Explorer > (localdb)\MSSQLLocalDB > Databases > Bookshelf > Tables > dbo.Books > View Data.
+   Expect six rows, IDs 1–6, four read and two unread, and a nullable Rating column.
+4. Run. Open F12 > Network > Preserve log.
+5. GET /books: 200, six cards, 4 of 6 read, rating text and Add a book link.
+6. /books/1: first book, Next only. /books/3: Prev and Next. /books/6: Prev only.
+7. /books/7 before adding: 404. /books/three: 404.
+8. /books/2/mark-read: 302 to /books, then 200; message, badge, 5 of 6 read.
+9. Refresh: message disappears, read badge stays.
+10. Stop with Shift+F5 and restart: Jujutsu Kaisen remains read.
+11. /books/2/mark-unread: 302, message, badge removed. Restart: remains unread.
+12. GET /books/new: 200. Form has title, author, pages, rating and read checkbox; no ID input.
+13. Add The Book of Night Women, Marlon James, 432 pages, unread, rating 5.
+    POST /books/add: 302 to /books; Added The Book of Night Women; seven cards, 4 of 7 read.
+14. Refresh: added message disappears. Restart: seventh book remains; details /books/7 works, Prev only.
+15. To test server validation, disable browser form validation with F12 or remove required/min/max attributes.
+    Submit blank title/author, pages 0 or 5001, or rating 6. Expect form errors, preserved inputs, no extra row.
+    Leave rating blank on a valid submission: should save with Not rated.
+16. /books/999/mark-read and /books/999/mark-unread: 404 with no data changes.
+
+Counts assume a new database and the order above. Later valid additions increase the count.

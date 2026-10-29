@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] | Bookshelf</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <span class="brand">BOOKSHELF / MANGA COLLECTION</span>
+        <nav aria-label="Main navigation">
+            <a asp-controller="Books" asp-action="Index">My shelf</a>
+        </nav>
+    </header>
+    <main>
+        <partial name="_Flash" />
+        @RenderBody()
+    </main>
+    <footer>My reading collection.</footer>
+</body>
+</html>

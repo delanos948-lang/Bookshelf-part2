@@ -1,0 +1,29 @@
+@model Book
+@{ ViewData["Title"] = "Add a book"; }
+<h1>Add a book</h1>
+<form asp-controller="Books" asp-action="Add" method="post">
+    <div asp-validation-summary="All" class="validation"></div>
+    <div class="field">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" required />
+        <span asp-validation-for="Title" class="validation"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Author"></label>
+        <input asp-for="Author" required />
+        <span asp-validation-for="Author" class="validation"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Pages"></label>
+        <input asp-for="Pages" min="1" max="5000" required />
+        <span asp-validation-for="Pages" class="validation"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Rating">Rating (optional, 1–5)</label>
+        <input asp-for="Rating" min="1" max="5" />
+        <span asp-validation-for="Rating" class="validation"></span>
+    </div>
+    <div class="field"><label><input asp-for="IsRead" /> Read</label></div>
+    <button type="submit" class="btn">Add book</button>
+    <a asp-action="Index" class="btn">Cancel</a>
+</form>

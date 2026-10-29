@@ -1,0 +1,20 @@
+@model Book
+<article class="book-card">
+    <p class="volume">MANGA / BOOK @Model.Id</p>
+    <h2><a asp-controller="Books" asp-action="Details" asp-route-id="@Model.Id">@Model.Title</a></h2>
+    <p>@Model.Author &middot; @Model.Pages pages</p>
+    <p>Rating: @(Model.Rating.HasValue ? $"{Model.Rating}/5" : "Not rated")</p>
+    @if (Model.IsRead)
+    {
+        <span class="badge bg-success">Read</span>
+        <div class="card-actions">
+            <a class="btn btn-sm btn-outline-primary" asp-controller="Books" asp-action="MarkUnread" asp-route-id="@Model.Id">Mark as unread</a>
+        </div>
+    }
+    else
+    {
+        <div class="card-actions">
+            <a class="btn btn-sm btn-outline-primary" asp-controller="Books" asp-action="MarkRead" asp-route-id="@Model.Id">Mark as read</a>
+        </div>
+    }
+</article>

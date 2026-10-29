@@ -1,0 +1,19 @@
+@model List<Book>
+@{ ViewData["Title"] = "My shelf"; }
+<p class="eyebrow">MY MANGA COLLECTION</p>
+<h1>My shelf</h1>
+@if (Model.All(book => book.IsRead))
+{
+    <p class="read-count">All read!</p>
+}
+else
+{
+    <p class="read-count">@Model.Count(book => book.IsRead) of @Model.Count read</p>
+}
+<p><a class="btn" asp-action="New">Add a book</a></p>
+<div class="shelf">
+    @foreach (Book book in Model)
+    {
+        <partial name="_BookCard" model="book" />
+    }
+</div>

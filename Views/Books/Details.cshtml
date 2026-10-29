@@ -1,0 +1,18 @@
+@model Book
+@{ ViewData["Title"] = Model.Title; }
+<p class="eyebrow">BOOK @Model.Id / @ViewBag.LastId</p>
+<h1>@Model.Title</h1>
+<p><strong>Author:</strong> @Model.Author</p>
+<p><strong>Pages:</strong> @Model.Pages</p>
+<p><strong>Status:</strong> @(Model.IsRead ? "Read" : "Not read yet")</p>
+<p><strong>Rating:</strong> @(Model.Rating.HasValue ? $"{Model.Rating}/5" : "Not rated")</p>
+<nav class="controls" aria-label="Book navigation">
+    @if (Model.Id > 1)
+    {
+        <a class="btn" asp-controller="Books" asp-action="Details" asp-route-id="@(Model.Id - 1)">Prev</a>
+    }
+    @if (Model.Id < (int)ViewBag.LastId)
+    {
+        <a class="btn" asp-controller="Books" asp-action="Details" asp-route-id="@(Model.Id + 1)">Next</a>
+    }
+</nav>

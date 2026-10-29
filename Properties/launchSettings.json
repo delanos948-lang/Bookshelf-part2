@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Bookshelf": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "books",
+      "applicationUrl": "http://localhost:5124",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
